@@ -65,5 +65,13 @@ func (gapi *Client) SendFileByUrl(
 
 	}
 
+	responseBodyBytes, err := io.ReadAll(resp.Body)
+
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+
+	fmt.Println(string(responseBodyBytes))
+
 	return nil, fmt.Errorf("%s: %w", op, ErrGreenAPIError)
 }
