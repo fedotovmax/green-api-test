@@ -11,12 +11,12 @@ import (
 	"github.com/fedotovmax/green-api-test/internal/keys"
 )
 
-func (gapi *greenAPI) GetSettings(ctx context.Context, instanceID, tokenAPI string) (
+func (gapi *Client) GetSettings(ctx context.Context, instanceID, tokenAPI string) (
 	*domain.InstanceSettings, error) {
 
 	const op = "adapters.clients.greenapi.GetSettings"
 
-	url := buildURL(gapi.apiURL, instanceID, tokenAPI, GetSettingsMethod)
+	url := buildURL(gapi.config.URL, instanceID, tokenAPI, GetSettingsMethod)
 
 	req, err := http.NewRequestWithContext(ctx, keys.HTTPMethodGet, url, nil)
 

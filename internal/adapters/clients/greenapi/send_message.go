@@ -13,7 +13,7 @@ import (
 	"github.com/fedotovmax/green-api-test/internal/keys"
 )
 
-func (gapi *greenAPI) SendMessage(
+func (gapi *Client) SendMessage(
 	ctx context.Context,
 	instanceID, tokenAPI string,
 	in *inputs.SendTextMessage,
@@ -22,7 +22,7 @@ func (gapi *greenAPI) SendMessage(
 ) {
 	const op = "adapters.clients.greenapi.SendMessage"
 
-	url := buildURL(gapi.apiURL, instanceID, tokenAPI, SendMessageMethod)
+	url := buildURL(gapi.config.URL, instanceID, tokenAPI, SendMessageMethod)
 
 	inputBytes, err := json.Marshal(in)
 

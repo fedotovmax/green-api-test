@@ -1,0 +1,91 @@
+* {
+	font-family: Arial, Helvetica, sans-serif;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+.container {
+	max-width: 1230px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin: 0 auto;
+}
+.wrapper {
+	display: flex;
+}
+.left {
+	margin-right: 20px;
+}
+.right {
+	padding: 10px;
+	border: 1px solid teal;
+	flex-grow: 1;
+}
+
+.settings {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 25px;
+}
+
+#instanceID {
+	display: inline-block;
+	font-family: inherit;
+	margin-bottom: 10px;
+}
+#instanceTokenAPI {
+	display: inline-block;
+	font-family: inherit;
+}
+.getSettingsBtn {
+	display: inline-block;
+	margin-bottom: 20px;
+	font-family: inherit;
+}
+.getInstanceStateBtn {
+	display: inline-block;
+	font-family: inherit;
+	margin-bottom: 20px;
+}
+.newTextMessageData {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+#textMessageChatID {
+	display: inline-block;
+	margin-bottom: 10px;
+	font-family: inherit;
+}
+#textMessageText {
+	display: inline-block;
+	font-family: inherit;
+}
+.sendTextMessageBtn {
+	display: inline-block;
+	font-family: inherit;
+	margin-bottom: 35px;
+}
+.newFileUrlMessage {
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
+}
+#fileURLMessageChatID {
+	display: inline-block;
+	margin-bottom: 10px;
+	font-family: inherit;
+}
+#fileURLMessageURL {
+	display: inline-block;
+	margin-bottom: 10px;
+	font-family: inherit;
+}
+#fileURLMessageFileName {
+	display: inline-block;
+	font-family: inherit;
+}
+.sendFileUrlMessageBtn {
+	display: inline-block;
+	font-family: inherit;
+}

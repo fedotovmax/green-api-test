@@ -4,9 +4,15 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"os"
+	"path/filepath"
 
+	"github.com/fedotovmax/green-api-test/internal/adapters/clients/greenapi"
 	"github.com/fedotovmax/green-api-test/internal/adapters/server/http"
 	"github.com/fedotovmax/green-api-test/internal/config"
+	"github.com/fedotovmax/green-api-test/internal/controllers/api"
+	"github.com/fedotovmax/green-api-test/internal/controllers/pages"
+	"github.com/fedotovmax/green-api-test/internal/middlewares"
 	"github.com/fedotovmax/green-api-test/pkg/logger"
 	"github.com/go-chi/chi/v5"
 )
@@ -21,7 +27,25 @@ func New(appConfig *config.AppConfig, log *slog.Logger) (*App, error) {
 
 	const op = "app.New"
 
+	workdir, err := os.Getwd()
+
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+
+	publicDir := filepath.Join(workdir, "web", "public")
+
 	router := chi.NewRouter()
+
+	router.Use(middlewares.GzipMiddleware)
+
+	greenapiClient := greenapi.New(log, appConfig.GreenAPI)
+
+	pagesController := pages.New(publicDir)
+	apiController := api.New(greenapiClient)
+
+	pagesController.Register(router)
+	apiController.Register(router)
 
 	httpServer := http.New(appConfig.HTTPServer, router)
 

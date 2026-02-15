@@ -13,7 +13,7 @@ import (
 	"github.com/fedotovmax/green-api-test/internal/keys"
 )
 
-func (gapi *greenAPI) SendFileByUrl(
+func (gapi *Client) SendFileByUrl(
 	ctx context.Context,
 	instanceID, tokenAPI string,
 	in *inputs.SendFile,
@@ -22,7 +22,7 @@ func (gapi *greenAPI) SendFileByUrl(
 ) {
 	const op = "adapters.clients.greenapi.SendFileByUrl"
 
-	url := buildURL(gapi.apiURL, instanceID, tokenAPI, SendFileByUrlMethod)
+	url := buildURL(gapi.config.URL, instanceID, tokenAPI, SendFileByUrlMethod)
 
 	inputBytes, err := json.Marshal(in)
 

@@ -3,18 +3,20 @@ package greenapi
 import (
 	"log/slog"
 	"net/http"
+
+	"github.com/fedotovmax/green-api-test/internal/config"
 )
 
-type greenAPI struct {
+type Client struct {
 	httpClient *http.Client
 	log        *slog.Logger
-	apiURL     string
+	config     *config.GreenAPIConfig
 }
 
-func New(log *slog.Logger, greenApiURL string) *greenAPI {
-	return &greenAPI{
+func New(log *slog.Logger, config *config.GreenAPIConfig) *Client {
+	return &Client{
 		httpClient: &http.Client{},
-		apiURL:     greenApiURL,
+		config:     config,
 		log:        log,
 	}
 }

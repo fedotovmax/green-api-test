@@ -3,6 +3,8 @@ package config
 import (
 	"errors"
 	"fmt"
+
+	"github.com/fedotovmax/green-api-test/internal/validation"
 )
 
 var ErrInvalidAppEnv = errors.New("app env is invalid or not supported")
@@ -67,7 +69,7 @@ func New() (*AppConfig, error) {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}
 
-	return &AppConfig{
+	cfg := &AppConfig{
 		HTTPServer: &HTTPServerConfig{
 			Port: httpServerPort,
 		},
@@ -75,6 +77,33 @@ func New() (*AppConfig, error) {
 			URL: greenAPIURL,
 		},
 		Env: env,
-	}, nil
+	}
 
+	err = cfg.validate()
+
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+
+	return cfg, nil
+
+}
+
+func (c *AppConfig) validate() error {
+
+	var validationErrors []error
+
+	_, err := validation.IsURI(c.GreenAPI.URL)
+
+	if err != nil {
+		validationErrors = append(validationErrors, fmt.Errorf("%s: %w", "GreenAPI.URL", err))
+	}
+
+	err = validation.Range(c.HTTPServer.Port, 1024, 65535)
+
+	if err != nil {
+		validationErrors = append(validationErrors, fmt.Errorf("%s: %w", "HTTPServer.Port", err))
+	}
+
+	return errors.Join(validationErrors...)
 }

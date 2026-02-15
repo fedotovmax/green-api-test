@@ -11,12 +11,12 @@ import (
 	"github.com/fedotovmax/green-api-test/internal/keys"
 )
 
-func (gapi *greenAPI) GetStateInstance(ctx context.Context, instanceID, tokenAPI string) (
+func (gapi *Client) GetStateInstance(ctx context.Context, instanceID, tokenAPI string) (
 	*domain.InstanceStateResponse, error,
 ) {
 	const op = "adapters.clients.greenapi.GetStateInstance"
 
-	url := buildURL(gapi.apiURL, instanceID, tokenAPI, GetStateInstanceMethod)
+	url := buildURL(gapi.config.URL, instanceID, tokenAPI, GetStateInstanceMethod)
 
 	req, err := http.NewRequestWithContext(ctx, keys.HTTPMethodGet, url, nil)
 
