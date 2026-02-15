@@ -29,8 +29,13 @@ type HTTPServerConfig struct {
 	Port uint16
 }
 
+type GreenAPIConfig struct {
+	URL string
+}
+
 type AppConfig struct {
 	HTTPServer *HTTPServerConfig
+	GreenAPI   *GreenAPIConfig
 	Env        AppEnv
 }
 
@@ -56,9 +61,18 @@ func New() (*AppConfig, error) {
 		return nil, fmt.Errorf("%s: %w", op, err)
 	}
 
+	greenAPIURL, err := getEnv("GREEN_API_URL")
+
+	if err != nil {
+		return nil, fmt.Errorf("%s: %w", op, err)
+	}
+
 	return &AppConfig{
 		HTTPServer: &HTTPServerConfig{
 			Port: httpServerPort,
+		},
+		GreenAPI: &GreenAPIConfig{
+			URL: greenAPIURL,
 		},
 		Env: env,
 	}, nil
