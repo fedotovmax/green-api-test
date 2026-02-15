@@ -1,0 +1,10 @@
+package components 
+
+import "github.com/fedotovmax/green-api-test/internal/domain"
+
+templ NewMessage(newMsg *domain.NewMessage) {
+	<div>
+		<strong>New Message ID: </strong>
+		{ newMsg.ID }
+	</div>
+}

@@ -1,5 +1,8 @@
 package home
 
+import "github.com/starfederation/datastar-go/datastar"
+import "github.com/fedotovmax/green-api-test/internal/controllers/api"
+
 templ Page() {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -16,26 +19,32 @@ templ Page() {
 					<div class="wrapper">
 						<div class="left">
 							<div class="settings">
-								<input type="text" id="instanceID" placeholder="instanceID"/>
-								<input type="text" id="instanceTokenAPI" placeholder="instanceTokenAPI"/>
+								<input data-bind:instanceId type="text" id="instanceID" placeholder="instanceID"/>
+								<input data-bind:apiToken type="text" id="instanceTokenAPI" placeholder="instanceTokenAPI"/>
 							</div>
-							<button class="getSettingsBtn">getSettings</button>
-							<button class="getInstanceStateBtn">getInstanceState</button>
+							<button data-on:click={ datastar.GetSSE(api.RouteGetSettings) } class="getSettingsBtn">getSettings</button>
+							<button data-on:click={ datastar.GetSSE(api.RouteGetInstanceState) } class="getInstanceStateBtn">getInstanceState</button>
 							<div class="newTextMessageData">
-								<input type="text" id="textMessageChatID" placeholder="chatID"/>
-								<textarea name="" id="textMessageText" placeholder="message"></textarea>
+								<input data-bind:sendMessageChatId type="text" id="textMessageChatID" placeholder="chatID"/>
+								<textarea data-bind:newMessage name="" id="textMessageText" placeholder="message"></textarea>
 							</div>
-							<button class="sendTextMessageBtn">sendTextMessage</button>
+							<button
+								data-on:click={ datastar.PostSSE(api.RouteSendMessage) }
+								class="sendTextMessageBtn"
+							>sendTextMessage</button>
 							<div class="newFileUrlMessage">
-								<input type="text" id="fileURLMessageChatID" placeholder="chatID"/>
-								<input type="text" id="fileURLMessageURL" placeholder="file url"/>
-								<input type="text" id="fileURLMessageFileName" placeholder="file name"/>
+								<input data-bind:sendFileChatId type="text" id="fileURLMessageChatID" placeholder="chatID"/>
+								<input data-bind:fileUrl type="text" id="fileURLMessageURL" placeholder="file url"/>
+								<input data-bind:fileName type="text" id="fileURLMessageFileName" placeholder="file name"/>
 							</div>
-							<button class="sendFileUrlMessageBtn">sendFileUrlMessage</button>
+							<button
+								data-on:click={ datastar.PostSSE(api.RouteSendFileByURL) }
+								class="sendFileUrlMessageBtn"
+							>sendFileUrlMessage</button>
 						</div>
 						<div class="right">
 							Ответ:
-							<div id="greenteaAPIResponse"></div>
+							<div id="greenAPIResponse"></div>
 						</div>
 					</div>
 				</div>

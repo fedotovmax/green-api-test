@@ -1,0 +1,50 @@
+package components
+
+import "github.com/fedotovmax/green-api-test/internal/domain"
+
+templ State(state *domain.InstanceStateResponse) {
+	{{
+		var color string
+		var label string
+
+		switch state.StateInstance {
+		case domain.StateAuthorized:
+			color = "green"
+			label = "Authorized"
+
+		case domain.StateNotAuthorized:
+			color = "gray"
+			label = "Not Authorized"
+
+		case domain.StateBlocked:
+			color = "red"
+			label = "Blocked"
+
+		case domain.StateSleepMode:
+			color = "blue"
+			label = "Sleep Mode"
+
+		case domain.StateStarting:
+			color = "orange"
+			label = "Starting"
+
+		case domain.StateYellowCard:
+			color = "gold"
+			label = "Yellow Card"
+
+		default:
+			color = "black"
+			label = string(state.StateInstance)
+		}
+	}}
+	<div
+		style={ "display:inline-block;" +
+		"padding:8px 14px;" +
+		"border-radius:8px;" +
+		"font-weight:600;" +
+		"color:white;" +
+		"background-color:" + color + ";" }
+	>
+		Status: { label }
+	</div>
+}

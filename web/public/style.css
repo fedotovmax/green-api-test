@@ -11,6 +11,7 @@
 	margin: 0 auto;
 }
 .wrapper {
+	padding-bottom: 40px;
 	display: flex;
 }
 .left {
@@ -88,4 +89,15 @@
 .sendFileUrlMessageBtn {
 	display: inline-block;
 	font-family: inherit;
+}
+
+#greenAPIResponse {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
 }

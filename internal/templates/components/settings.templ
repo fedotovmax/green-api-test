@@ -1,0 +1,34 @@
+package components
+
+import "github.com/fedotovmax/green-api-test/internal/domain"
+
+templ Settings(settings *domain.InstanceSettings) {
+	<div>
+		<h2>Instance Settings </h2>
+		<ul>
+			<li><strong>Wid:</strong> { settings.Wid }</li>
+			<li><strong>Country Instance:</strong> { settings.CountryInstance }</li>
+			<li><strong>Type Account:</strong> { settings.TypeAccount }</li>
+			<li><strong>Webhook URL:</strong> { settings.WebhookURL }</li>
+			<li><strong>Webhook URL Token:</strong> { settings.WebhookURLToken }</li>
+			<li><strong>Delay Send Messages (ms):</strong> { settings.DelaySendMessagesMilliseconds }</li>
+			<li><strong>Mark Incoming Messages Readed:</strong> { settings.MarkIncomingMessagesReaded }</li>
+			<li><strong>Mark Incoming Messages Readed On Reply:</strong> { settings.MarkIncomingMessagesReadedOnReply }</li>
+			<li><strong>Shared Session:</strong> { settings.SharedSession }</li>
+			<li><strong>Outgoing Webhook:</strong> { settings.OutgoingWebhook }</li>
+			<li><strong>Outgoing Message Webhook:</strong> { settings.OutgoingMessageWebhook }</li>
+			<li><strong>Outgoing API Message Webhook:</strong> { settings.OutgoingAPIMessageWebhook }</li>
+			<li><strong>Incoming Webhook:</strong> { settings.IncomingWebhook }</li>
+			<li><strong>Device Webhook:</strong> { settings.DeviceWebhook }</li>
+			<li><strong>Status Instance Webhook:</strong> { settings.StatusInstanceWebhook }</li>
+			<li><strong>State Webhook:</strong> { settings.StateWebhook }</li>
+			<li><strong>Enable Messages History:</strong> { settings.EnableMessagesHistory }</li>
+			<li><strong>Keep Online Status:</strong> { settings.KeepOnlineStatus }</li>
+			<li><strong>Poll Message Webhook:</strong> { settings.PollMessageWebhook }</li>
+			<li><strong>Incoming Block Webhook:</strong> { settings.IncomingBlockWebhook }</li>
+			<li><strong>Incoming Call Webhook:</strong> { settings.IncomingCallWebhook }</li>
+			<li><strong>Edited Message Webhook:</strong> { settings.EditedMessageWebhook }</li>
+			<li><strong>Deleted Message Webhook:</strong> { settings.DeletedMessageWebhook }</li>
+		</ul>
+	</div>
+}

@@ -16,5 +16,10 @@ func New(greenApi *greenapi.Client) *controller {
 }
 
 func (c *controller) Register(router chi.Router) {
-	//todo:
+	router.Route(prefix, func(apiRouter chi.Router) {
+		apiRouter.Get(routeGetInstanceState, c.getStateInstance)
+		apiRouter.Get(routeGetSettings, c.getSettings)
+		apiRouter.Post(routeSendFileByURL, c.sendFileByUrl)
+		apiRouter.Post(routeSendMessage, c.sendMessage)
+	})
 }

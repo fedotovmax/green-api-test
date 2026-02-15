@@ -8,6 +8,9 @@ package home
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import "github.com/starfederation/datastar-go/datastar"
+import "github.com/fedotovmax/green-api-test/internal/controllers/api"
+
 func Page() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -29,7 +32,59 @@ func Page() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>GreenAPI Test APP | Fedotov Maxim</title><link rel=\"stylesheet\" href=\"/public/style.css\"><script type=\"module\" src=\"/public/datastar.js\"></script></head><body><div style=\"padding-top: 120px;\"><div class=\"container\"><div class=\"wrapper\"><div class=\"left\"><div class=\"settings\"><input type=\"text\" id=\"instanceID\" placeholder=\"instanceID\"> <input type=\"text\" id=\"instanceTokenAPI\" placeholder=\"instanceTokenAPI\"></div><button class=\"getSettingsBtn\">getSettings</button> <button class=\"getInstanceStateBtn\">getInstanceState</button><div class=\"newTextMessageData\"><input type=\"text\" id=\"textMessageChatID\" placeholder=\"chatID\"> <textarea name=\"\" id=\"textMessageText\" placeholder=\"message\"></textarea></div><button class=\"sendTextMessageBtn\">sendTextMessage</button><div class=\"newFileUrlMessage\"><input type=\"text\" id=\"fileURLMessageChatID\" placeholder=\"chatID\"> <input type=\"text\" id=\"fileURLMessageURL\" placeholder=\"file url\"> <input type=\"text\" id=\"fileURLMessageFileName\" placeholder=\"file name\"></div><button class=\"sendFileUrlMessageBtn\">sendFileUrlMessage</button></div><div class=\"right\">Ответ:<div id=\"greenteaAPIResponse\"></div></div></div></div></div></body></html>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>GreenAPI Test APP | Fedotov Maxim</title><link rel=\"stylesheet\" href=\"/public/style.css\"><script type=\"module\" src=\"/public/datastar.js\"></script></head><body><div style=\"padding-top: 120px;\"><div class=\"container\"><div class=\"wrapper\"><div class=\"left\"><div class=\"settings\"><input data-bind:instanceId type=\"text\" id=\"instanceID\" placeholder=\"instanceID\"> <input data-bind:apiToken type=\"text\" id=\"instanceTokenAPI\" placeholder=\"instanceTokenAPI\"></div><button data-on:click=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var2 string
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(datastar.GetSSE(api.RouteGetSettings))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/home/page.templ`, Line: 25, Col: 68}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "\" class=\"getSettingsBtn\">getSettings</button> <button data-on:click=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var3 string
+		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(datastar.GetSSE(api.RouteGetInstanceState))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/home/page.templ`, Line: 26, Col: 73}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "\" class=\"getInstanceStateBtn\">getInstanceState</button><div class=\"newTextMessageData\"><input data-bind:sendMessageChatId type=\"text\" id=\"textMessageChatID\" placeholder=\"chatID\"> <textarea data-bind:newMessage name=\"\" id=\"textMessageText\" placeholder=\"message\"></textarea></div><button data-on:click=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(datastar.PostSSE(api.RouteSendMessage))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/home/page.templ`, Line: 32, Col: 62}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "\" class=\"sendTextMessageBtn\">sendTextMessage</button><div class=\"newFileUrlMessage\"><input data-bind:sendFileChatId type=\"text\" id=\"fileURLMessageChatID\" placeholder=\"chatID\"> <input data-bind:fileUrl type=\"text\" id=\"fileURLMessageURL\" placeholder=\"file url\"> <input data-bind:fileName type=\"text\" id=\"fileURLMessageFileName\" placeholder=\"file name\"></div><button data-on:click=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var5 string
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(datastar.PostSSE(api.RouteSendFileByURL))
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/templates/home/page.templ`, Line: 41, Col: 64}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "\" class=\"sendFileUrlMessageBtn\">sendFileUrlMessage</button></div><div class=\"right\">Ответ:<div id=\"greenAPIResponse\"></div></div></div></div></div></body></html>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
